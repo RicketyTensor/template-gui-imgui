@@ -45,13 +45,13 @@ namespace Detail {
     struct KeyTester_ ## Key                                                                        \
     {                                                                                               \
         template <typename T>                                                                       \
-        static int Get(typename std::enable_if<has_nested_ ## Key<ImGuiKey_>::value, T>::type*)     \
+        static ImGuiKey Get(typename std::enable_if<has_nested_ ## Key<ImGuiKey>::value, T>::type*)     \
         {                                                                                           \
             return ImGui::GetKeyIndex(T::Key);                                                      \
         }                                                                                           \
                                                                                                     \
         template <typename T>                                                                       \
-        static int Get(typename std::enable_if<!has_nested_ ## Key<ImGuiKey_>::value, T>::type*)    \
+        static ImGuiKey Get(typename std::enable_if<!has_nested_ ## Key<ImGuiKey>::value, T>::type*)    \
         {                                                                                           \
             return -1;                                                                              \
         }                                                                                           \
@@ -60,14 +60,14 @@ namespace Detail {
 DECLARE_KEY_TESTER(ImGuiKey_F);
 DECLARE_KEY_TESTER(ImGuiKey_D);
 
-static inline int GetKeyIndexForF()
+static inline ImGuiKey GetKeyIndexForF()
 {
-    return KeyTester_ImGuiKey_F::Get<ImGuiKey_>(nullptr);
+    return KeyTester_ImGuiKey_F::Get<ImGuiKey>(nullptr);
 }
 
-static inline int GetKeyIndexForD()
+static inline ImGuiKey GetKeyIndexForD()
 {
-    return KeyTester_ImGuiKey_D::Get<ImGuiKey_>(nullptr);
+    return KeyTester_ImGuiKey_D::Get<ImGuiKey>(nullptr);
 }
 
 } // namespace Detail
@@ -2546,7 +2546,10 @@ ed::Control ed::EditorContext::BuildControl(bool allowOffscreen)
     if (!allowOffscreen && !m_IsHovered)
         return Control();
 
-# if IMGUI_VERSION_NUM >= 17909
+# if IMGUI_VERSION_NUM >= 18900
+    if (m_IsHoveredWithoutOverlapp)
+        ImGui::SetItemKeyOwner(ImGuiKey_MouseWheelY);
+# elif IMGUI_VERSION_NUM >= 17909
     if (m_IsHoveredWithoutOverlapp)
         ImGui::SetItemUsingMouseWheel();
 # endif

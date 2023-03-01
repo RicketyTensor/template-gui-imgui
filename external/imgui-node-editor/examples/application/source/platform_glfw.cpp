@@ -13,6 +13,9 @@
 #     include <GLFW/glfw3native.h>
 # endif
 
+# ifndef IMGUI_DEFINE_MATH_OPERATORS
+    # define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 # include <imgui.h>
 # include "imgui_impl_glfw.h"
 

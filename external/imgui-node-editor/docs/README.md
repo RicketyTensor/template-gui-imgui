@@ -89,6 +89,9 @@ Main node editor header is located in [imgui_node_editor.h](../imgui_node_editor
 Minimal example of one node can be found in [simple-example.cpp](../examples/simple-example/simple-example.cpp).
 Press 'F' in editor to focus on editor content if you see only grid.
 ```cpp
+# ifndef IMGUI_DEFINE_MATH_OPERATORS
+    # define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 # include <imgui.h>
 # include <imgui_node_editor.h>
 # include <application.h>

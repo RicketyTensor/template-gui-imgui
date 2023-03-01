@@ -11,6 +11,9 @@
 #     include <windows.h>
 # endif
 
+# ifndef IMGUI_DEFINE_MATH_OPERATORS
+    # define IMGUI_DEFINE_MATH_OPERATORS
+#endif
 # include <imgui.h>
 # include "imgui_impl_dx11.h"
 # include <d3d11.h>
