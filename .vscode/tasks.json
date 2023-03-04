@@ -1,13 +1,56 @@
 {
 	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "shell",
-			"label": "CMake: build",
-			"command": "mkdir -p ${workspaceRoot}/cmake-build; cd ${workspaceRoot}/cmake-build; cmake ..; make -j 8",
-			"group": "build",
-			"problemMatcher": [],
-			"detail": "CMake template build task"
-		}
-	]
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build project",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "clean",
+                "cmake",
+                "make clean",
+                "make",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "rm",
+			"args": ["-r", "${workspaceFolder}/build/*"],
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+        },
+        {
+            "label": "cmake",
+            "type": "shell",
+            "command": "cmake ..",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+        },
+        {
+            "label": "make clean",
+            "type": "shell",
+            "command": "make clean",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+			"args": ["-j", "16"],
+            "problemMatcher": ["$gcc"],
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+        }
+    ]
 }
