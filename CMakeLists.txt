@@ -126,6 +126,3 @@ macro(add_example_executable name)
 endmacro()
 
 add_subdirectory(src)
-
-add_subdirectory(example-basic_interaction)
-add_subdirectory(example-widgets)

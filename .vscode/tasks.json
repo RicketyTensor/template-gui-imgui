@@ -20,7 +20,7 @@
             "label": "clean",
             "type": "shell",
             "command": "rm",
-			"args": ["-r", "${workspaceFolder}/build/*"],
+			"args": ["-rf", "${workspaceFolder}/build/*"],
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}",
