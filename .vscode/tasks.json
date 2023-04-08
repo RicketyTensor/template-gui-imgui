@@ -6,6 +6,7 @@
             "label": "build project",
             "dependsOrder": "sequence",
             "dependsOn": [
+                "mkdir",
                 "clean",
                 "cmake",
                 "make clean",
@@ -15,6 +16,16 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "mkdir",
+            "type": "shell",
+            "command": "mkdir",
+			"args": ["-p", "${workspaceFolder}/build"],
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
         },
         {
             "label": "clean",
